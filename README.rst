@@ -10,13 +10,14 @@ pygit2 to your activated virtualenv.
 Requirements
 ------------
 
- * cmake
+- cmake
 
 
 Installation
 ------------
 
 ::
+
     $ virtualenv venv
     $ . venv/bin/activate
     (venv) $ pip install venvgit2
@@ -31,10 +32,12 @@ Development
 1) Clone this repository 
 
 ::
+
     $ git clone git@github.com:uniphil/venvgit2.git
 
 
 2) Grab the submodules
 
 ::
+
     $ git submodule update --init
