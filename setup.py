@@ -89,6 +89,8 @@ class InstallEverything(install):
 
 setup(
     name="venvgit2",
+    description="Install libgit2 and pygit2 in a virtualenv",
+    long_description=open('README.rst').read(),
     version="0.20.2.0",
     cmdclass={
       'install': InstallEverything,
