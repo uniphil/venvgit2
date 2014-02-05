@@ -29,10 +29,11 @@ class Dirs(object):
 
     def __exit__(self, *args):
         os.chdir(self.src)
-        rmtree(self.work_dir)
+        # rmtree(self.work_dir)
 
 
 def cmake_is_installed():
+    print('Looking for cmake...')
     try:
         check_call(['which', 'cmake'])
         return True
@@ -40,46 +41,56 @@ def cmake_is_installed():
         return False
 
 
+def pythondev_is_installed():
+    print('Looking for python dev files...')
+    try:
+        from distutils import sysconfig
+    except ImportError as e:
+        return False
+    includepy = sysconfig.get_config_vars()['INCLUDEPY']
+    pythonh = os.path.join(includepy, 'Python.h')
+    dev_present = os.path.isfile(pythonh)
+    return dev_present
+
+
 def install_libgit2(dirs):
+    """See https://github.com/libgit2/libgit2/blob/development/README.md"""
     os.chdir(dirs.work_dir)
-    print('  libgit2 cmake...')
+    print('libgit2 cmake...')
     check_call(['cmake', dirs.libgit2_src,
                 '-DCMAKE_INSTALL_PREFIX={}'.format(dirs.prefix)])  #, '-BUILD_CLAR=OFF'])
-    print('  libgit2 making...')
+    print('libgit2 making...')
     check_call(['cmake', '--build', dirs.work_dir, '--target', 'install'])
 
 
 def install_pygit2(dirs):
+    """See http://www.pygit2.org/install.html"""
     os.environ['LIBGIT2'] = dirs.prefix
     os.environ['LDFLAGS'] = "-Wl,-rpath='{}/lib',--enable-new-dtags {}".format(dirs.prefix, os.environ.get('LDFLAGS', ''))
     script = os.path.join(dirs.pygit2_src, 'setup.py')
     os.chdir(dirs.pygit2_src)
-    print('  pygit2 clean...')
+    print('pygit2 clean...')
     check_call(['python', script, 'clean'])
-    print('  pygit2 build...')
+    print('pygit2 build...')
     check_call(['python', script, 'build'])
-    print('  pygit2 install...')
+    print('pygit2 install...')
     check_call(['python', script, 'install'])
 
 
 class InstallEverything(install):
     """Install everything..."""
     def run(self):
-        if not cmake_is_installed():
-            raise SystemExit("Aborting: please install cmake")
+        assert cmake_is_installed(), "Aborting: please install cmake"
+        assert pythondev_is_installed(), "Aborting: please install python development headers"
         with Dirs() as dirs:
             install_libgit2(dirs)
             install_pygit2(dirs)
-        # super(InstallEverything, self).run()  # noop?
+        install.run(self)
 
 
 setup(
     name="venvgit2",
-    version="0.0.1",
-    # include_package_data=True,
-    # package_data={
-    #   '': ['README.rst'],
-    # },
+    version="0.20.0.alpha0",
     cmdclass={
       'install': InstallEverything,
     },
@@ -87,5 +98,5 @@ setup(
     author_email='uniphil@gmail.com',
     description=open('README.rst').read(),
     license='MPL',
-    url='http://github.com/Queens-Hacks/venvgit2',
+    url='http://github.com/uniphil/venvgit2',
 )

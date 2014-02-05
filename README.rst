@@ -11,6 +11,7 @@ Requirements
 ------------
 
 - cmake
+- python-dev
 
 
 Installation
