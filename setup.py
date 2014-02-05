@@ -17,8 +17,7 @@ class Dirs(object):
 
     def __init__(self):
         self.prefix = os.environ.get('VIRTUAL_ENV')
-        if self.prefix is None:
-            raise SystemExit('Aborting: please activate a virtualenv')
+        assert self.prefix is not None, 'Aborting: please activate a virtualenv'
         self.src = os.getcwd()
         self.libgit2_src = os.path.join(self.src, 'libgit2')  # source
         self.pygit2_src = os.path.join(self.src, 'pygit2')  # source
@@ -29,7 +28,7 @@ class Dirs(object):
 
     def __exit__(self, *args):
         os.chdir(self.src)
-        # rmtree(self.work_dir)
+        rmtree(self.work_dir)
 
 
 def cmake_is_installed():
@@ -42,6 +41,7 @@ def cmake_is_installed():
 
 
 def pythondev_is_installed():
+    """ inspried by http://stackoverflow.com/questions/4848566/check-for-existence-of-python-dev-files-from-bash-script"""
     print('Looking for python dev files...')
     try:
         from distutils import sysconfig
@@ -57,8 +57,7 @@ def install_libgit2(dirs):
     """See https://github.com/libgit2/libgit2/blob/development/README.md"""
     os.chdir(dirs.work_dir)
     print('libgit2 cmake...')
-    check_call(['cmake', dirs.libgit2_src,
-                '-DCMAKE_INSTALL_PREFIX={}'.format(dirs.prefix)])  #, '-BUILD_CLAR=OFF'])
+    check_call(['cmake', dirs.libgit2_src, '-DCMAKE_INSTALL_PREFIX={}'.format(dirs.prefix)])
     print('libgit2 making...')
     check_call(['cmake', '--build', dirs.work_dir, '--target', 'install'])
 
@@ -90,13 +89,12 @@ class InstallEverything(install):
 
 setup(
     name="venvgit2",
-    version="0.20.0.alpha0",
+    version="0.20.2.0",
     cmdclass={
       'install': InstallEverything,
     },
     author='uniphil',
     author_email='uniphil@gmail.com',
-    description=open('README.rst').read(),
-    license='MPL',
+    license='Public Domain',
     url='http://github.com/uniphil/venvgit2',
 )
