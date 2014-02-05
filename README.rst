@@ -41,8 +41,8 @@ Woo hoo if no errors are raised, it is likely that you are set to go!
 versions of ``libgit2`` and ``pygit2``. Each project has its own excellent"
 documentation:
 
-- libgit2: http://libgit2.github.com/
-- pygit2: http://www.pygit2.org/
+- `libgit2 docs <http://libgit2.github.com/>`_
+- `pygit2 docs <http://www.pygit2.org/>`_
 
 
 Development
@@ -136,4 +136,4 @@ The libraries used by ``venvgit2`` have licenses you should be aware of. They
 are linked here for quick reference:
 
 - ``libgit2``: `GPLv2 with linking exception <https://github.com/libgit2/libgit2/blob/development/COPYING>`_
-- ``pygit2``: `GPLv2 with linking exception <https://github.com/libgit2/pygit2#license>`_
+- ``pygit2``: `also GPLv2 with linking exception <https://github.com/libgit2/pygit2#license>`_
