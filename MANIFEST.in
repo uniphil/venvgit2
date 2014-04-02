@@ -1,2 +1,12 @@
 recursive-include libgit2 *
+prune libgit2/tests
+prune libgit2/apidocs
+prune libgit2/build
+prune libgit2/msvc
+prune libgit2/examples
+
 recursive-include pygit2 *
+prune pygit2/build
+prune pygit2/dist
+prune pygit2/test
+prune pygit2/docs

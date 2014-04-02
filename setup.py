@@ -5,6 +5,7 @@
 """
 
 import os
+from glob import glob
 from shutil import rmtree
 from tempfile import mkdtemp
 from setuptools import setup
@@ -57,7 +58,10 @@ def install_libgit2(dirs):
     """See https://github.com/libgit2/libgit2/blob/development/README.md"""
     os.chdir(dirs.work_dir)
     print('libgit2 cmake...')
-    check_call(['cmake', dirs.libgit2_src, '-DCMAKE_INSTALL_PREFIX={}'.format(dirs.prefix)])
+    check_call(['cmake',
+                dirs.libgit2_src,
+                '-DCMAKE_INSTALL_PREFIX={}'.format(dirs.prefix),
+                '-DBUILD_CLAR=OFF'])
     print('libgit2 making...')
     check_call(['cmake', '--build', dirs.work_dir, '--target', 'install'])
 
@@ -91,7 +95,7 @@ setup(
     name="venvgit2",
     description="Install libgit2 and pygit2 in a virtualenv",
     long_description=open('README.rst').read(),
-    version="0.20.2.0",
+    version="0.20.3.0",
     cmdclass={
       'install': InstallEverything,
     },
