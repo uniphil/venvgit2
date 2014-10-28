@@ -1,6 +1,9 @@
 venvgit2
 ========
 
+.. image:: https://travis-ci.org/uniphil/venvgit2.svg?branch=master
+    :target: https://travis-ci.org/uniphil/venvgit2
+
 `pygit2 <http://www.pygit2.org/>`_ is awesome. pygit2 is hard to install.
 
 Installing this package will try to install matched versions of libgit2 and
@@ -48,7 +51,7 @@ documentation:
 Development
 -----------
 
-1) Clone this repository 
+1) Clone this repository
 
 ::
 
