@@ -3,4 +3,4 @@
 	url = git://github.com/libgit2/libgit2.git
 [submodule "pygit2"]
 	path = pygit2
-	url = git@github.com:libgit2/pygit2.git
+	url = git://github.com/libgit2/pygit2.git
