@@ -1,8 +1,8 @@
 venvgit2
 ========
 
-.. image:: https://travis-ci.org/Graham42/venvgit2.svg?branch=master
-    :target: https://travis-ci.org/Graham42/venvgit2
+.. image:: https://travis-ci.org/uniphil/venvgit2.svg?branch=master
+    :target: https://travis-ci.org/uniphil/venvgit2
 
 `pygit2 <http://www.pygit2.org/>`_ is awesome. pygit2 is hard to install.
 
