@@ -99,6 +99,7 @@ setup(
     install_requires=[
         'cffi>=0.8.6',
     ],
+    py_modules=['venvgit2'],
     cmdclass={
       'install': InstallEverything,
     },
