@@ -85,17 +85,20 @@ class InstallEverything(install):
     def run(self):
         assert cmake_is_installed(), "Aborting: please install cmake"
         assert pythondev_is_installed(), "Aborting: please install python development headers"
+        install.do_egg_install(self)  # install_requires... http://stackoverflow.com/a/22179371
         with Dirs() as dirs:
             install_libgit2(dirs)
             install_pygit2(dirs)
-        install.run(self)
 
 
 setup(
     name="venvgit2",
     description="Install libgit2 and pygit2 in a virtualenv",
     long_description=open('README.rst').read(),
-    version="0.20.3.0",
+    version="0.21.4.0",
+    install_requires=[
+        'cffi>=0.8.6',
+    ],
     cmdclass={
       'install': InstallEverything,
     },
