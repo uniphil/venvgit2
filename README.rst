@@ -116,16 +116,11 @@ installation is automated in the ``setup.py`` script. Piece of cake.
 Versions
 ^^^^^^^^
 
-Releases of ``venvgit2`` are synchronized with ``pygit2``, which in tern
-synchronizes with minor releases of ``libgit2``. All the major/minor versions
-should always match, so installing ``venvgit2==0.20.2.0`` will, as of today,
-set up ``libgit2==0.20.0`` and ``pygit2==0.20.2``.
-
-Fixes and updates to ``venvgit2`` will (hopefully) be rare apart from updating
-the ``py``- and ``libgit2`` submodules to sync up. If there are bugfixes to
-``venvgit2`` itself, they will increment an extra version level, like
-``venvgit2==0.20.2.1``, ``venvgit2==0.20.2.2``, etc.
-
+Releases of ``venvgit2`` are matched pairs of ``pygit2``, and ``libgit2``. We
+increment the ``patch`` number (``major.minor.patch``) each time we release a
+new pair (ie., when either ``venvgit2`` or ``pygit2`` update) or when changes
+are made to ``venvgit2 itself``. ``pygit2`` has more details for choosing
+compatible releases, but with ``venvgit2``, ``pip install...`` should just work.
 
 
 License
