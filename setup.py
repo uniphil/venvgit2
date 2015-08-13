@@ -60,7 +60,7 @@ def install_libgit2(dirs):
     print('libgit2 cmake...')
     check_call(['cmake',
                 dirs.libgit2_src,
-                '-DCMAKE_INSTALL_PREFIX={}'.format(dirs.prefix),
+                '-DCMAKE_INSTALL_PREFIX={0}'.format(dirs.prefix),
                 '-DBUILD_CLAR=OFF'])
     print('libgit2 making...')
     check_call(['cmake', '--build', dirs.work_dir, '--target', 'install'])
@@ -69,7 +69,7 @@ def install_libgit2(dirs):
 def install_pygit2(dirs):
     """See http://www.pygit2.org/install.html"""
     os.environ['LIBGIT2'] = dirs.prefix
-    os.environ['LDFLAGS'] = "-Wl,-rpath='{}/lib',--enable-new-dtags {}".format(dirs.prefix, os.environ.get('LDFLAGS', ''))
+    os.environ['LDFLAGS'] = "-Wl,-rpath='{0}/lib',--enable-new-dtags {1}".format(dirs.prefix, os.environ.get('LDFLAGS', ''))
     script = os.path.join(dirs.pygit2_src, 'setup.py')
     os.chdir(dirs.pygit2_src)
     print('pygit2 clean...')
