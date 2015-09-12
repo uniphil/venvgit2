@@ -119,8 +119,9 @@ Versions
 Releases of ``venvgit2`` are matched pairs of ``pygit2``, and ``libgit2``. We
 increment the ``patch`` number (``major.minor.patch``) each time we release a
 new pair (ie., when either ``venvgit2`` or ``pygit2`` update) or when changes
-are made to ``venvgit2 itself``. ``pygit2`` has more details for choosing
-compatible releases, but with ``venvgit2``, ``pip install...`` should just work.
+are made to ``venvgit2 itself``. ``pygit2`` has `more details
+<http://www.pygit2.org/install.html#version-numbers>`_ for choosing compatible
+releases, but with ``venvgit2``, ``pip install...`` should just work.
 
 
 License
