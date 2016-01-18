@@ -95,7 +95,7 @@ setup(
     name="venvgit2",
     description="Install libgit2 and pygit2 in a virtualenv",
     long_description=open('README.rst').read(),
-    version="0.22.2",
+    version="0.23.4",
     install_requires=[
         'cffi>=0.8.6',
     ],
