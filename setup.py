@@ -105,5 +105,5 @@ setup(
     author='uniphil',
     author_email='uniphil@gmail.com',
     license='Public Domain',
-    url='http://github.com/uniphil/venvgit2',
+    url='https://github.com/uniphil/venvgit2',
 )
