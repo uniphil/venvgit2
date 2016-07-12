@@ -99,7 +99,7 @@ setup(
         'cffi>=0.8.6',
     ],
     cmdclass={
-      'install': InstallEverything,
+        'install': InstallEverything,
     },
     author='uniphil',
     author_email='uniphil@gmail.com',
