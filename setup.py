@@ -45,7 +45,7 @@ def pythondev_is_installed():
     print('Looking for python dev files...')
     try:
         from distutils import sysconfig
-    except ImportError as e:
+    except ImportError:
         return False
     includepy = sysconfig.get_config_vars()['INCLUDEPY']
     pythonh = os.path.join(includepy, 'Python.h')
