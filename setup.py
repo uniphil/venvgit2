@@ -5,7 +5,6 @@
 """
 
 import os
-from glob import glob
 from shutil import rmtree
 from tempfile import mkdtemp
 from setuptools import setup
