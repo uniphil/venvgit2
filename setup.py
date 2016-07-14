@@ -5,7 +5,7 @@
 """
 
 import os
-from glob import glob
+import platform
 from shutil import rmtree
 from tempfile import mkdtemp
 from setuptools import setup
@@ -46,7 +46,7 @@ def pythondev_is_installed():
     print('Looking for python dev files...')
     try:
         from distutils import sysconfig
-    except ImportError as e:
+    except ImportError:
         return False
     includepy = sysconfig.get_config_vars()['INCLUDEPY']
     pythonh = os.path.join(includepy, 'Python.h')
@@ -58,9 +58,13 @@ def install_libgit2(dirs):
     """See https://github.com/libgit2/libgit2/blob/development/README.md"""
     os.chdir(dirs.work_dir)
     print('libgit2 cmake...')
+    libdir = os.path.join(dirs.prefix, 'lib')
     check_call(['cmake',
                 dirs.libgit2_src,
                 '-DCMAKE_INSTALL_PREFIX={0}'.format(dirs.prefix),
+                '-DCMAKE_INSTALL_RPATH={0}'.format(libdir),
+                '-DCMAKE_INSTALL_NAME_DIR={0}'.format(libdir),
+                '-DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=TRUE',
                 '-DBUILD_CLAR=OFF'])
     print('libgit2 making...')
     check_call(['cmake', '--build', dirs.work_dir, '--target', 'install'])
@@ -69,7 +73,11 @@ def install_libgit2(dirs):
 def install_pygit2(dirs):
     """See http://www.pygit2.org/install.html"""
     os.environ['LIBGIT2'] = dirs.prefix
-    os.environ['LDFLAGS'] = "-Wl,-rpath='{0}/lib',--enable-new-dtags {1}".format(dirs.prefix, os.environ.get('LDFLAGS', ''))
+    platform_name = platform.system()
+    if 'Windows' not in platform_name and 'Darwin' not in platform_name:
+        # The following has two linux-specific options: -rpath= is a GNUism and
+        # --enable-new-dtags is only for ELF, so let's
+        os.environ['LDFLAGS'] = "-Wl,-rpath='{0}/lib',--enable-new-dtags {1}".format(dirs.prefix, os.environ.get('LDFLAGS', ''))
     script = os.path.join(dirs.pygit2_src, 'setup.py')
     os.chdir(dirs.pygit2_src)
     print('pygit2 clean...')
@@ -100,7 +108,7 @@ setup(
         'cffi>=0.8.6',
     ],
     cmdclass={
-      'install': InstallEverything,
+        'install': InstallEverything,
     },
     author='uniphil',
     author_email='uniphil@gmail.com',
