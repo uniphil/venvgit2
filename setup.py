@@ -105,7 +105,7 @@ setup(
     long_description=open('README.rst').read(),
     version="0.25.0",
     install_requires=[
-        'cffi>=0.8.6',
+        'cffi>=0.8.6,<1.10',
     ],
     cmdclass={
         'install': InstallEverything,
