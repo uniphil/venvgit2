@@ -1,6 +1,5 @@
 language: python
 git:
-  depth: 9999999
   submodules: false
 python:
   - 2.7
