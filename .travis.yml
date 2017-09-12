@@ -1,10 +1,13 @@
 language: python
 git:
   depth: 9999999
+  submodules: false
 python:
   - 2.7
   - 3.3
   - 3.4
+before_install:
+  - git submodule update --init --recursive || true
 install:
   - python setup.py install
 script: python -c "import pygit2"
