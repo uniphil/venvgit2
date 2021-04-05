@@ -1,0 +1,29 @@
+name: mac & linux builds
+
+on:
+  push:
+
+jobs:
+  build-latest:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        python-version:
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: python -m venv venv
+      - run: . venv/bin/activate && python setup.py install
+      - run: venv/bin/python -c "import pygit2"
