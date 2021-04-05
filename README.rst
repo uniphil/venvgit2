@@ -1,8 +1,12 @@
 venvgit2
 ========
 
-.. image:: https://travis-ci.org/uniphil/venvgit2.svg?branch=master
-    :target: https://travis-ci.org/uniphil/venvgit2
+.. image:: https://github.com/uniphil/venvgit2/actions/workflows/test.yml/badge.svg
+    :target: https://github.com/uniphil/venvgit2/actions
+    :alt: Github Actions status badge
+
+.. image:: https://circleci.com/gh/uniphil/venvgit2.svg?style=shield
+    :alt: CircleCI status badge
 
 `pygit2 <http://www.pygit2.org/>`_ is awesome. pygit2 is hard to install.
 
